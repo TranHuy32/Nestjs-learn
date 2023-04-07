@@ -15,7 +15,7 @@ export class UsersService {
   constructor(
     @InjectRepository(UsersRepository)
     private usersRepository: UsersRepository,
-  ) {}
+  ) { }
 
   public async hashPassword(password: string): Promise<string> {
     return await bcrypt.hash(password, 12);
@@ -49,11 +49,7 @@ export class UsersService {
   }
   public async getOneByEmail(email: string) {
     try {
-      const user = await this.usersRepository.getOneByEmail(email);
-    //   if (!user) {
-    //     throw new NotFoundException('User not found');
-    //   }
-      return user;
+      return await this.usersRepository.getOneByEmail(email);
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
     }

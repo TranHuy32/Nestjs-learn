@@ -1,14 +1,16 @@
-import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
+import { ConflictException, Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 import { signInDto } from './dto/signIn.dto';
 import { UsersService } from 'src/users/users.service';
 import { JwtService } from '@nestjs/jwt';
+import { signUpDto } from './dto/signUp.dto';
+import { User } from 'src/users/user.entity';
 
 @Injectable()
 export class AuthService {
   constructor(
     private jwtService: JwtService,
     private userService: UsersService,
-  ) {}
+  ) { }
 
   async signIn(body: signInDto): Promise<any> {
     const user = await this.userService.getOneByEmail(body.email);
@@ -23,6 +25,14 @@ export class AuthService {
     return {
       access_token: await this.jwtService.signAsync(payload),
     };
+  }
+  async signUp(body: signUpDto): Promise<User> {
+    const user = await this.userService.getOneByEmail(body.email);
+    if (user) {
+      throw new ConflictException();
+    }
+    body.password = await this.userService.hashPassword(body.password);
+    return this.userService.createUser(body);
   }
 
   // async signUp(body: signUpDto): Promise<any> {

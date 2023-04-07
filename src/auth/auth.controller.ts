@@ -14,15 +14,13 @@ import { signInDto } from './dto/signIn.dto';
 import { User } from 'src/users/user.entity';
 import { JwtAuthGuard } from './auth.guard';
 import { signUpDto } from './dto/signUp.dto';
-import { UsersService } from 'src/users/users.service';
 
 @Controller('auth')
 export class AuthController {
   // userService: any;
   constructor(
     private authService: AuthService,
-    private userService: UsersService,
-  ) {}
+  ) { }
 
   @HttpCode(HttpStatus.OK)
   @Post('signin')
@@ -32,12 +30,7 @@ export class AuthController {
 
   @Post('signup')
   async signUp(@Body() body: signUpDto): Promise<User> {
-    const user = await this.userService.getOneByEmail(body.email);
-    if (user) {
-      throw new ConflictException();
-    }
-    body.password = await this.userService.hashPassword(body.password);
-    return this.userService.createUser(body);
+    return this.authService.signUp(body);
   }
 
   @UseGuards(JwtAuthGuard)
