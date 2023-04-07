@@ -1,22 +1,20 @@
 // import { Pet } from "src/pets/pet.entity";
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class User {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    name: string;
-    // body: any;
-    @Column()
-    email: string;
+  @Column()
+  name: string;
+  // body: any;
+  @Column()
+  email: string;
 
-    @Column()
-    password: string;
+  @Column()
+  password: string;
 
-
-    // @OneToMany(type => Pet, pet => pet.owner)
-    // pets: Pet[];
-
+  // @OneToMany(type => Pet, pet => pet.owner)
+  // pets: Pet[];
 }

@@ -1,16 +1,15 @@
-import { IsAlphanumeric, MaxLength } from "class-validator";
-import { Column } from "typeorm";
+import { IsAlphanumeric, MaxLength } from 'class-validator';
+import { Column } from 'typeorm';
 
 export class UpdateUserDto {
-    id: number
-    @IsAlphanumeric()
-    @MaxLength(30)
-    name: string;
+  id: number;
+  @IsAlphanumeric()
+  @MaxLength(30)
+  name: string;
 
-    @Column()
-    email: string;
+  @Column()
+  email: string;
 
-    @Column()
-    password: string;
-
+  @Column()
+  password: string;
 }

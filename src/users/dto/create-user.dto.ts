@@ -1,16 +1,14 @@
-import { IsAlphanumeric, MaxLength } from "class-validator";
-import { Column } from "typeorm";
+import { IsAlphanumeric, MaxLength } from 'class-validator';
+import { Column } from 'typeorm';
 
 export class CreateUserDto {
+  @IsAlphanumeric()
+  @MaxLength(10)
+  name: string;
 
-    @IsAlphanumeric()
-    @MaxLength(10)
-    name: string;
+  @Column()
+  email: string;
 
-    @Column()
-    email: string;
-
-    @Column()
-    password: string;
-
+  @Column()
+  password: string;
 }

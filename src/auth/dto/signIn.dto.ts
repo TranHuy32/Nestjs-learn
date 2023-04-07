@@ -1,12 +1,11 @@
-import { MaxLength } from "class-validator";
-import { Column } from "typeorm";
+import { MaxLength } from 'class-validator';
+import { Column } from 'typeorm';
 
 export class signInDto {
-    @Column()
-    email: string;
+  @Column()
+  email: string;
 
-    @MaxLength(10)
-    @Column()
-    password: string;
-
+  @MaxLength(10)
+  @Column()
+  password: string;
 }
